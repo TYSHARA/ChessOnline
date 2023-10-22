@@ -1,0 +1,54 @@
+/* Общие стили для страницы */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eeeeee;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100vh;
+    margin: 0 20px;
+  }
+  
+  /* Стили для заголовка */
+  h1 {
+    font-size: 24px;
+    margin-right: 20px;
+    color: #006699;
+  }
+  
+  /* Стили для шахматной доски */
+  .chess-board {
+    /* Размеры и стили для доски */
+  }
+  
+  /* Стили для ячеек на доске */
+  .chess-board table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 320px;
+    height: 320px;
+    table-layout: fixed;
+  }
+  
+  .chess-board td {
+    border: 1px solid #000;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  /* Стили для черных и белых ячеек */
+  .black {
+    background: #b58863;
+  }
+  
+  .white {
+    background: #f0d9b5;
+  }
+  
