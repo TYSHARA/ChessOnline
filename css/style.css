@@ -1,0 +1,22 @@
+.chessboard {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 1fr);
+    width: 400px;
+    height: 400px;
+}
+
+/* Define styles for chess pieces, similar to what you've used before */
+.chess-piece {
+    width: 50px;
+    height: 50px;
+    background: url('images/chess-pieces.png') no-repeat;
+}
+
+.white-square {
+    background-color: #f0d9b5;
+}
+
+.black-square {
+    background-color: #b58863;
+}
