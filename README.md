@@ -33,5 +33,5 @@
     python3 -m http.server 9000
     
 
-<script> const copyButton = document.getElementById("copy-button"); copyButton.addEventListener("click", function () { const codeSnippet = `git clone https://github.com/TYSHARA/ChessOnline/tree/master`; const textArea = document.createElement("textarea"); textArea.value = codeSnippet; document.body.appendChild(textArea); textArea.select(); document.execCommand("copy"); document.body.removeChild(textArea); alert("Command copied to clipboard!"); }); </script> 
+
 
