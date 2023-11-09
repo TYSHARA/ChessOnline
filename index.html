@@ -1,17 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>My Chess Game</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-    <h1>Welcome to the Chess Game</h1>
-    <a href="documentation.html" target="_blank">View README</a>
-    <p>Here's an image of the chess pieces:</p>
+    <header>
+        <div class = "title">Играть в шахматы</div>
+    </header>
+    <div class = "container">
+        <button class = "button button-top">Играть за черных</button>
+        <button class = "button button-bottom">Играть за белых</button>
+        <div class = "chess-board">
+            <img alt = "Доска" class = "board" width = "496" height="496" src = "images/MainBoard.png">
+        </div>
+    </div>
+    </body>
     
-    <!-- Include an image with the src attribute pointing to the image file -->
-    <img src="images/chess-pieces.png" alt="Chess Pieces">
-    
-    <script src="js/script.js"></script>
-</body>
-</html>
