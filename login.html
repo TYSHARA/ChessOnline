@@ -3,27 +3,32 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/login.css">
 </head>
 <body>
-    <h1>Login</h1>
-    <form id="login-form">
-        <!-- Username field -->
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
+    <div class = "container">
+        <h1>Login</h1>
+        <form id="login-form">
+            <!-- Username field -->
+            <div class = "username">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <!-- Password field -->
+            <div class = "password">
+                <label for="password" width = "78.25" height = "17.6">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <!-- Error message placeholder (for displaying login errors) -->
+            <div id="login-error" style="color: red;"></div>
         
-        <!-- Password field -->
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        
-        <!-- Error message placeholder (for displaying login errors) -->
-        <div id="login-error" style="color: red;"></div>
-        
-        <!-- Submit button -->
-        <button type="submit">Login</button>
-    </form>
+            <!-- Submit button -->
+            <button class = "login-button" type="submit">Login</button>
+        </form>
     
-    <p>Don't have an account? <a href="register.html">Register here</a></p>
-
+        <p>Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
     <!-- JavaScript code to handle the login form submission -->
     <script>
         document.getElementById('login-form').addEventListener('submit', function (event) {
