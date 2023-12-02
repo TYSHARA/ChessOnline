@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #312e2b;
+}
+.box{
+    text-align: center; 
+    background-color: #312e2b; 
+}
+.centered { 
+    display: inline-block; 
+    margin: 0; 
+}
+.chess-board { 
+    border-spacing: 0; 
+    border-collapse: collapse; 
+}
+.chess-board th { 
+    padding: .5em;
+    color: grey;
+}
+.chess-board td { 
+    border: 1px solid; 
+    width: 4em; 
+    height: 4em; 
+    text-align: center; 
+    vertical-align: middle; 
+    position: relative; 
+}
+.chess-board .white { 
+    background: #ebecd0; 
+}
+.chess-board .black { 
+    background: #779556; 
+}
+
+.chess-piece{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 63px; /* Замените на желаемую ширину */
+    height: 63px; /* Замените на желаемую высоту */
+    
+}
