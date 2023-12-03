@@ -24,14 +24,19 @@
             <div id="login-error" style="color: red;"></div>
         
             <!-- Submit button -->
-            <button class = "login-button" type="submit">Login</button>
+            <button class = "login-button" id="login-button" type="submit">Login</button>
         </form>
     
         <p>Don't have an account? <a href="register.html">Register here</a></p>
     </div>
     <!-- JavaScript code to handle the login form submission -->
+    
+    
+    
+    
+    
     <script>
-        document.getElementById('login-form').addEventListener('submit', function (event) {
+        document.getElementById('login-button').addEventListener('submit', function (event) {
             event.preventDefault();
             var username = document.getElementById('username').value;
             var password = document.getElementById('password').value;
@@ -42,7 +47,7 @@
                 password: password
             };
 
-            fetch('index/', {
+            fetch('api/login/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -55,7 +60,7 @@
                 // Handle the response data, including errors and redirects
                 if (data.success) {
                     // Redirect the user to the desired page after successful login
-                    window.location.href = '/main/';
+                    window.location.href = '/game-lobby/';
                 } else {
                     // Display error messages in the 'login-error' div
                     document.getElementById('login-error').textContent = data.error;

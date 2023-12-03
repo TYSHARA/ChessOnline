@@ -1,3 +1,4 @@
+       
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -7,14 +8,21 @@
 </head>
 <body>
     <header>
-        <div class = "title">Играть в шахматы</div>
+        <div class="title">Играть в шахматы</div>
     </header>
-    <div class = "container">
-        <button class = "button button-top">Играть за черных</button>
-        <button class = "button button-bottom">Играть за белых</button>
-        <div class = "chess-board">
-            <img alt = "Доска" class = "board" width = "496" height="496" src = "images/MainBoard.png">
+    <div class="container">
+        <button class="button button-top" onclick="redirectToLogin()">Играть за черных</button>
+        <button class="button button-bottom" onclick="redirectToLogin()">Играть за белых</button>
+        <div class="chess-board">
+            <img alt="Доска" class="board" width="496" height="496" src="images/MainBoard.png">
         </div>
     </div>
-    </body>
-    
+
+    <script>
+        function redirectToLogin() {
+            // Redirect the user to the login page
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

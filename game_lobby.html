@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Lobby</title>
+</head>
+<body>
+    <h1>Game Lobby</h1>
+
+    <!-- Form for creating a new game -->
+    <form method="post" action="{% url 'game-lobby-view' %}">
+        {% csrf_token %}
+        {{ create_game_form.as_p }}
+        <button type="submit">Create Game</button>
+    </form>
+
+    <!-- Display a list of available games -->
+    <h2>Available Games</h2>
+    <ul>
+        {% for game in available_games %}
+            <li><a href="{% url 'game-detail-view' game.id %}">{{ game }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

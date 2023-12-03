@@ -31,6 +31,10 @@
     <p>Already have an account? <a href="login.html">Login here</a></p>
 
     <!-- JavaScript code to handle the registration form submission -->
+    
+    
+    
+    
     <script>
         document.getElementById('register-form').addEventListener('submit', function (event) {
             event.preventDefault();
@@ -61,7 +65,7 @@
                     // Handle the response data, including errors and redirects
                     if (data.success) {
                         // Redirect the user to the desired page after successful registration
-                        window.location.href = '/index/';
+                        window.location.href = '/api/login/';
                     } else {
                         // Display error messages in the 'register-error' div
                         document.getElementById('register-error').textContent = data.error;
