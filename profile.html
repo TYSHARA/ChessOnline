@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <div>
+        <h2>User Information</h2>
+        <p>Username: <span id="username"></span></p>
+        <p>Email: <span id="email"></span></p>
+        <!-- Add more user information as needed -->
+    </div>
+
+    <div>
+        <h2>Game History</h2>
+        <ul id="game-history">
+            <!-- Game history will be populated here -->
+        </ul>
+    </div>
+
+    <script>
+        // JavaScript code to make API requests and populate data
+
+        // Function to fetch user profile data from the API
+        function fetchUserProfile() {
+            fetch('/api/userprofile/<user_id>/')  // Replace <user_id> with the actual user's ID
+                .then(response => response.json())
+                .then(data => {
+                    // Populate user information
+                    document.getElementById('username').textContent = data.username;
+                    document.getElementById('email').textContent = data.email;
+                })
+                .catch(error => console.error('Error fetching user profile:', error));
+        }
+
+        // Function to fetch game history data from the API
+        function fetchGameHistory() {
+            fetch('/api/games/')  // Adjust the endpoint to match your API URL for game history
+                .then(response => response.json())
+                .then(data => {
+                    // Populate game history
+                    const gameHistoryList = document.getElementById('game-history');
+                    data.forEach(game => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `Game ID: ${game.id}`;
+                        // Add more game details as needed
+                        gameHistoryList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error fetching game history:', error));
+        }
+
+        // Fetch user profile data and game history when the page loads
+        window.addEventListener('load', () => {
+            fetchUserProfile();
+            fetchGameHistory();
+        });
+    </script>
+</body>
+</html>
