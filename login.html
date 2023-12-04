@@ -35,41 +35,44 @@
     
     
     
-    <script>
-        document.getElementById('login-button').addEventListener('submit', function (event) {
-            event.preventDefault();
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
+   <script>
+    document.getElementById('login-button').addEventListener('click', function (event) {
+        event.preventDefault();
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
 
-            // Create an object to hold the login data
-            var loginData = {
-                username: username,
-                password: password
-            };
+        // Create an object to hold the login data
+        var loginData = {
+            username: username,
+            password: password
+        };
 
-            fetch('api/login/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // You can include additional headers if needed, such as CSRF tokens
-                },
-                body: JSON.stringify(loginData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Handle the response data, including errors and redirects
-                if (data.success) {
-                    // Redirect the user to the desired page after successful login
-                    window.location.href = '/game-lobby/';
-                } else {
-                    // Display error messages in the 'login-error' div
-                    document.getElementById('login-error').textContent = data.error;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        // Include the CSRF token in the headers
+        var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+
+        fetch('api/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken  // Include the CSRF token here
+            },
+            body: JSON.stringify(loginData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response data, including errors and redirects
+            if (data.success) {
+                // Redirect the user to the desired page after successful login
+                window.location.href = '/game-lobby/';
+            } else {
+                // Display error messages in the 'login-error' div
+                document.getElementById('login-error').textContent = data.error;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
-    </script>
+    });
+  </script>
 </body>
 </html>
