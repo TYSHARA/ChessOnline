@@ -24,6 +24,7 @@
         <!-- Error message placeholder (for displaying registration errors) -->
         <div id="register-error" style="color: red;"></div>
         
+        {% csrf_token %}
         <!-- Submit button -->
         <button type="submit">Register</button>
     </form>

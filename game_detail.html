@@ -6,10 +6,21 @@
     <title>Chess Game Detail</title>
 
     <!-- Include Chessboard.js and Chess.js from a CDN (Content Delivery Network) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chessboardjs@1/css/chessboard-0.3.0.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chessboardjs@1/js/chessboard-0.3.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chess.js@1.0.0/chess.min.js"></script>
+    <link rel="stylesheet"
+      href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
+      integrity="sha384-q94+BZtLrkL1/ohfjR8c6L+A6qzNH9R2hBLwyoAfu3i/WCvQjzL2RQJ3uNHDISdU"
+      crossorigin="anonymous">
+      
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2"
+        crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
+        integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD"
+        crossorigin="anonymous"></script>
+    
 </head>
+
 <body>
     <h1>Chess Game Detail</h1>
 
@@ -19,7 +30,17 @@
         <p>Player 2: {{ game.player2.username }}</p>
     </div>
 
-    <div id="{{ board_id }}"></div>
+
+    <div id="myBoard" style="width: 45%"></div>
+    <button id="ruyLopezBtn">Ruy Lopez</button>
+    <button id="startBtn">Start Position</button>
+    
+    <label>Status:</label>
+	<div id="status"></div>
+	<label>FEN:</label>
+	<div id="fen"></div>
+	<label>PGN:</label>
+	<div id="pgn"></div>
 
     <!-- Form for Making Moves -->
     <form method="post" action="{% url 'game-detail' game_id=game.id %}">
@@ -35,13 +56,131 @@
             <li>{{ move }}</li>
         {% endfor %}
     </ul>
+    
+   
 
     <script>
-        // JavaScript code to initialize the chessboard
-        const board = Chessboard('{{ board_id }}', 'start');
-        const game = new Chess();
+    
+    //for the importation of chess.js so that we make move validations
+	var board = null
+	var game = new Chess()
+	var $status = $('#status')
+	var $fen = $('#fen')
+	var $pgn = $('#pgn')
 
-	console.log('Chessboard.js initialized');
+	function onDragStart (source, piece, position, orientation) {
+	  // do not pick up pieces if the game is over
+	  if (game.game_over()) return false
+
+	  // only pick up pieces for the side to move
+	  if ((game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+	      (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
+	    return false
+	  }
+	}
+
+	function onDrop (source, target) {
+	  // see if the move is legal
+	  var move = game.move({
+	    from: source,
+	    to: target,
+	    promotion: 'q' // NOTE: always promote to a queen for example simplicity
+	  })
+
+	  // illegal move
+	  if (move === null) return 'snapback'
+
+	  updateStatus()
+	}
+
+	// update the board position after the piece snap
+	// for castling, en passant, pawn promotion
+	function onSnapEnd () {
+	  board.position(game.fen())
+	}
+
+	function updateStatus () {
+	  var status = ''
+
+	  var moveColor = 'White'
+	  if (game.turn() === 'b') {
+	    moveColor = 'Black'
+	  }
+
+	  // checkmate?
+	  if (game.in_checkmate()) {
+	    status = 'Game over, ' + moveColor + ' is in checkmate.'
+	  }
+
+	  // draw?
+	  else if (game.in_draw()) {
+	    status = 'Game over, drawn position'
+	  }
+
+	  // game still on
+	  else {
+	    status = moveColor + ' to move'
+
+	    // check?
+	    if (game.in_check()) {
+	      status += ', ' + moveColor + ' is in check'
+	    }
+	  }
+
+	  $status.html(status)
+	  $fen.html(game.fen())
+	  $pgn.html(game.pgn())
+	}
+	
+	
+	
+	
+	
+        // JavaScript code to initialize the chessboard
+        function pieceTheme (piece) {
+	  // wikipedia theme for white pieces
+	  if (piece.search(/w/) !== -1) {
+	    return 'img/chesspieces/wikipedia/' + piece + '.png'
+	  }
+
+	  // alpha theme for black pieces
+	  return 'img/chesspieces/alpha/' + piece + '.png'
+	}
+
+
+	function onDragStart (source, piece, position, orientation) {
+	  console.log('Drag started:')
+	  console.log('Source: ' + source)
+	  console.log('Piece: ' + piece)
+	  console.log('Position: ' + Chessboard.objToFen(position))
+	  console.log('Orientation: ' + orientation)
+	  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+	}
+
+
+	var config = {
+		  orientation: 'black',
+		  draggable: true,
+  		  dropOffBoard: 'trash',
+  		  pieceTheme: pieceTheme,
+		  position: 'start',
+		  moveSpeed: 'slow',
+		  snapbackSpeed: 500,
+		  onDragStart: onDragStart,
+		  onDrop: onDrop,
+		  onSnapEnd: onSnapEnd,
+		  snapSpeed: 100,
+		  showNotation: true
+		  
+		}
+		
+	var board = Chessboard('myBoard', config)
+	
+	$('#ruyLopezBtn').on('click', function () {
+	  board.position('r1bqkbnr/pppp1ppp/2n5/1B2p3/4P3/5N2/PPPP1PPP/RNBQK2R')
+	})
+	$('#startBtn').on('click', board.start)
+       
         // You can add more JavaScript code to handle moves and update the chessboard based on the game state
     </script>
 </body>
