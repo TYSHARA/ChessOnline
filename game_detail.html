@@ -59,9 +59,15 @@
     
    
 
-    <script>
+    <script> 
     
+   /*
+   const { Chess } = require('chess.js')
     //for the importation of chess.js so that we make move validations
+    
+  	
+  	//import { Chess } from '/node_modules/chess.js'
+
 	var board = null
 	var game = new Chess()
 	var $status = $('#status')
@@ -132,6 +138,7 @@
 	  $pgn.html(game.pgn())
 	}
 	
+	*/
 	
 	
 	
@@ -140,21 +147,11 @@
         function pieceTheme (piece) {
 	  // wikipedia theme for white pieces
 	  if (piece.search(/w/) !== -1) {
-	    return 'img/chesspieces/wikipedia/' + piece + '.png'
+	    return 'images/pieces/' + piece + '.svg'
 	  }
 
 	  // alpha theme for black pieces
-	  return 'img/chesspieces/alpha/' + piece + '.png'
-	}
-
-
-	function onDragStart (source, piece, position, orientation) {
-	  console.log('Drag started:')
-	  console.log('Source: ' + source)
-	  console.log('Piece: ' + piece)
-	  console.log('Position: ' + Chessboard.objToFen(position))
-	  console.log('Orientation: ' + orientation)
-	  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+	  return 'images/pieces/' + piece + '.svg'
 	}
 
 
@@ -166,9 +163,9 @@
 		  position: 'start',
 		  moveSpeed: 'slow',
 		  snapbackSpeed: 500,
-		  onDragStart: onDragStart,
-		  onDrop: onDrop,
-		  onSnapEnd: onSnapEnd,
+		  //onDragStart: onDragStart,
+		  //onDrop: onDrop,
+		  //onSnapEnd: onSnapEnd,
 		  snapSpeed: 100,
 		  showNotation: true
 		  
@@ -183,5 +180,6 @@
        
         // You can add more JavaScript code to handle moves and update the chessboard based on the game state
     </script>
+    
 </body>
 </html>
