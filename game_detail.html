@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,8 +20,11 @@
     <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
         integrity="sha384-8Vi8VHwn3vjQ9eUHUxex3JSN/NFqUg3QbPyX8kWyb93+8AC/pPWTzj+nHtbC5bxD"
         crossorigin="anonymous"></script>
-    
+        
+   
 </head>
+
+
 
 <body>
     <h1>Chess Game Detail</h1>
@@ -58,17 +63,14 @@
     </ul>
     
    
-
-    <script> 
     
-   /*
-   const { Chess } = require('chess.js')
+   
     //for the importation of chess.js so that we make move validations
+    <script type="module"> 
     
-  	
-  	//import { Chess } from '/node_modules/chess.js'
-
-	var board = null
+        import { Chess } from 'https://cdn.jsdelivr.net/npm/chess.js@1.0.0-beta.6/+esm' 
+      	
+	
 	var game = new Chess()
 	var $status = $('#status')
 	var $fen = $('#fen')
@@ -138,19 +140,19 @@
 	  $pgn.html(game.pgn())
 	}
 	
-	*/
 	
 	
 	
 	
         // JavaScript code to initialize the chessboard
         function pieceTheme (piece) {
-	  // wikipedia theme for white pieces
+        
+	  //Добавляем все белые фигуры на доску
 	  if (piece.search(/w/) !== -1) {
 	    return 'images/pieces/' + piece + '.svg'
 	  }
 
-	  // alpha theme for black pieces
+	  //for black pieces
 	  return 'images/pieces/' + piece + '.svg'
 	}
 
@@ -163,9 +165,9 @@
 		  position: 'start',
 		  moveSpeed: 'slow',
 		  snapbackSpeed: 500,
-		  //onDragStart: onDragStart,
-		  //onDrop: onDrop,
-		  //onSnapEnd: onSnapEnd,
+		  onDragStart: onDragStart,
+		  onDrop: onDrop,
+		  onSnapEnd: onSnapEnd,
 		  snapSpeed: 100,
 		  showNotation: true
 		  
@@ -178,7 +180,7 @@
 	})
 	$('#startBtn').on('click', board.start)
        
-        // You can add more JavaScript code to handle moves and update the chessboard based on the game state
+        
     </script>
     
 </body>
