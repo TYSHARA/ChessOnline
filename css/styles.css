@@ -6,10 +6,11 @@
     align-items: center;
 }
 body{
-    background-color: #4400CC;
+    background-color: #312e2b;
     margin: 0;
     padding: 0;
     font-family: Montserrat, sans-serif;
+    border: 2px solid #FFFFFF;
 }
 
 .title{

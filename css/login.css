@@ -4,7 +4,8 @@ body {
     display:inline-block;
     justify-content: center;
     align-items: center;
-    background: #4400CC;
+    background: #312e2b;
+    border: 2px solid #FFFFFF;
 }
 
 
@@ -52,9 +53,9 @@ body {
     line-height: 1.5;
     padding: 10px 45px;
     color:white;
-    border: 3px solid #4400CC;
+    border: 3px solid #5d9948;
     border-radius: 30px;
-    background-color: #4400CC;
+    background-color: #5d9948;
     z-index: 1;
     font-size:23px;
     width: 150px;
