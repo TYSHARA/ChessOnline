@@ -8,7 +8,8 @@
 
     <!-- Form for creating a new game -->
     <form method="post" action="{% url 'game-lobby-view' %}">
-    {% csrf_token %}
+  	{% csrf_token %}
+  	
     {{ create_game_form.as_p }}
     <button type="submit">Create Game</button>
 </form>
@@ -20,7 +21,7 @@
             {{ game }}
             {% if not game.is_full and game.is_active %}
                 <form method="post" action="{% url 'game-detail-view' %}">
-                    {% csrf_token %}
+                   
                     <input type="hidden" name="game_id" value="{{ game.id }}">
                     <button type="submit">Join Game</button>
                 </form>

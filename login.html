@@ -3,6 +3,9 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
+    
+    
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/login.css">
@@ -15,11 +18,11 @@
     
     <div class = "container">
         <h1>WELCOME</h1>
-        <form id="login-form">
-        
+        <form id="login-form" method="post" action="http://127.0.0.1:8000/chess/api/login/">	
+        	
             <!-- Username field -->
             <div class = "input-box">
-                <input type="text"  placeholder="Enter Username" required>
+                <input type="text"  id= "username" placeholder="Enter Username" required>
                 <i class='bx bxs-user-rectangle'></i>
             </div>
             
@@ -31,14 +34,19 @@
             
             <div class="remember-forgot">
             	<label><input type="checkbox"> Remember me</label>
-            	<a href="#">Forgot password?</a> 
+            	
+            	<a href="http://127.0.0.1:8000/password_reset/">Forgot password?</a> 
             </div>
             
             <!-- Error message placeholder (for displaying login errors) -->
             <div id="login-error" style="color: red;"></div>
             
             <!-- Submit button -->
+            
+            <a href="game_detail.html">
             <button class = "login-button" id="login-button" type="submit">Login</button>
+            </a>
+            
         </form>
     
         <p>Don't have an account? <a href="register.html">Register here</a></p>
@@ -50,43 +58,52 @@
     
     
    <script>
-    document.getElementById('login-button').addEventListener('click', function (event) {
-        event.preventDefault();
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
+   
+   /*
+       document.addEventListener('DOMContentLoaded', function() {
+        // This event listener ensures the DOM is fully loaded before fetching the CSRF token */
+        var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value; 
 
-        // Create an object to hold the login data
-        var loginData = {
-            username: username,
-            password: password
-        };
+        document.getElementById('login-button').addEventListener('click', function (event) {
+            // This event listener handles the login button click
+            event.preventDefault();
 
-        // Include the CSRF token in the headers
-        var csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+            var username = document.getElementById('username')[0].value;
+            var password = document.getElementById('password')[0].value;
 
-        fetch('api/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrfToken  // Include the CSRF token here
-            },
-            body: JSON.stringify(loginData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle the response data, including errors and redirects
-            if (data.success) {
-                // Redirect the user to the desired page after successful login
-                window.location.href = '/game-lobby/';
-            } else {
-                // Display error messages in the 'login-error' div
-                document.getElementById('login-error').textContent = data.error;
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
+            // Create an object to hold the login data
+            var loginData = {
+                username: username,
+                password: password
+            };
+
+            // Include the CSRF token in the headers
+            fetch('http://127.0.0.1:8000/chess/api/login/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(loginData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle the response data, including errors and redirects
+                if (data.success) {
+                    // Redirect the user to the desired page after successful login
+                    window.location.href = 'game_detail.html';
+                } else {
+                    // Display error messages in the 'login-error' div
+                    document.getElementById('login-error').textContent = data.error;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
-    });
+    });     
+    
+    
   </script>
 </body>
 </html>
